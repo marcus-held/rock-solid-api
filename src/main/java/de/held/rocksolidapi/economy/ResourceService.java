@@ -25,7 +25,7 @@ public class ResourceService {
 	@Scheduled(fixedDelay = INFLATION_RATE)
 	private void inflation() {
 		resourceRepository.findAll().forEach(resource -> {
-			val inflation = ThreadLocalRandom.current().nextDouble(0.1) + 1;
+			val inflation = ThreadLocalRandom.current().nextDouble(0.3) + 0.9;
 			Resource newResource = new Resource(resource.getId(), resource.getName(), resource.getPrice() * inflation);
 			resourceRepository.save(newResource);
 		});
