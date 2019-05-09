@@ -6,11 +6,11 @@ import org.junit.Test;
 
 public class UserTest {
 
-	private User user;
+	private UserEntity user;
 
 	@Before
 	public void setup() {
-		user = new User(0);
+		user = new UserEntity(0);
 	}
 
 	@Test

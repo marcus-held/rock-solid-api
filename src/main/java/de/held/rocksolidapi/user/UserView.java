@@ -1,14 +1,16 @@
 package de.held.rocksolidapi.user;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 @ShellComponent
-@RequiredArgsConstructor
 public class UserView {
 
 	private final UserService userService;
+
+	public UserView(UserService userService) {
+		this.userService = userService;
+	}
 
 	@ShellMethod(key = {"info"}, value = "Prints information about the user.")
 	public void printUserInfo() {

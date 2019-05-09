@@ -1,16 +1,19 @@
 package de.held.rocksolidapi.market;
 
 import de.held.rocksolidapi.user.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 @ShellComponent
-@RequiredArgsConstructor
 public class MarketView {
 
 	private final MarketService marketService;
 	private final UserService userService;
+
+	public MarketView(MarketService marketService, UserService userService) {
+		this.marketService = marketService;
+		this.userService = userService;
+	}
 
 	@ShellMethod(key = {"sell"}, value = "Sells the specified resource")
 	public void sell(int amount, String resourceName) {

@@ -1,31 +1,28 @@
 package de.held.rocksolidapi.user.model;
 
-import de.held.rocksolidapi.economy.ResourceId;
+import de.held.rocksolidapi.economy.model.ResourceIdVO;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.Value;
-import lombok.val;
 
-@Value
-public class Inventory {
+public class InventoryAggregate {
 
-	private Map<ResourceId, Integer> store = new HashMap<>();
+	private final Map<ResourceIdVO, Integer> store = new HashMap<>();
 
-	public Map<ResourceId, Integer> getAll() {
+	public Map<ResourceIdVO, Integer> getAll() {
 		return Map.copyOf(store);
 	}
 
-	public void add(ResourceId resourceId, int amount) {
+	public void add(ResourceIdVO resourceId, int amount) {
 		if (amount <= 0) {
 			throw new IllegalArgumentException("Can't add " + amount + " to the inventory.");
 		}
-		val amountInStore = store.getOrDefault(resourceId, 0);
+		var amountInStore = store.getOrDefault(resourceId, 0);
 		store.put(resourceId, amountInStore + amount);
 	}
 
-	public void deduct(ResourceId resourceId, int amount) {
-		val amountInStore = store.getOrDefault(resourceId, 0);
-		val newAmountIntStore = amountInStore - amount;
+	public void deduct(ResourceIdVO resourceId, int amount) {
+		var amountInStore = store.getOrDefault(resourceId, 0);
+		var newAmountIntStore = amountInStore - amount;
 		if (newAmountIntStore > 0) {
 			store.put(resourceId, newAmountIntStore);
 		} else if (newAmountIntStore == 0) {
@@ -35,7 +32,7 @@ public class Inventory {
 		}
 	}
 
-	public int count(ResourceId resourceId) {
+	public int count(ResourceIdVO resourceId) {
 		return store.getOrDefault(resourceId, 0);
 	}
 
