@@ -1,5 +1,6 @@
-package de.held.rocksolidapi.user.model;
+package de.held.rocksolidapi.user;
 
+import de.held.rocksolidapi.user.UserEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;

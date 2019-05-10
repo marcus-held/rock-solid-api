@@ -1,17 +1,17 @@
-package de.held.rocksolidapi.economy.model;
+package de.held.rocksolidapi.market;
 
 import java.util.List;
 import java.util.Objects;
 
-public class ResourceAggregate {
+public class Resources {
 
 	private final List<ResourceEntity> resources;
 
-	public static ResourceAggregate of(ResourceEntity... resources) {
-		return new ResourceAggregate(List.of(resources));
+	public static Resources of(ResourceEntity... resources) {
+		return new Resources(List.of(resources));
 	}
 
-	private ResourceAggregate(List<ResourceEntity> resources) {
+	private Resources(List<ResourceEntity> resources) {
 		this.resources = resources;
 	}
 
@@ -27,7 +27,7 @@ public class ResourceAggregate {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ResourceAggregate that = (ResourceAggregate) o;
+		Resources that = (Resources) o;
 		return Objects.equals(resources, that.resources);
 	}
 
@@ -38,7 +38,7 @@ public class ResourceAggregate {
 
 	@Override
 	public String toString() {
-		return "ResourceAggregate{" +
+		return "Resources{" +
 				"resources=" + resources +
 				'}';
 	}

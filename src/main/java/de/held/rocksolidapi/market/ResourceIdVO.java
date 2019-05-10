@@ -1,4 +1,4 @@
-package de.held.rocksolidapi.economy.model;
+package de.held.rocksolidapi.market;
 
 import java.util.Objects;
 
@@ -6,7 +6,7 @@ public class ResourceIdVO {
 
 	private final int id;
 
-	ResourceIdVO(int id) {
+	public ResourceIdVO(int id) {
 		this.id = id;
 	}
 

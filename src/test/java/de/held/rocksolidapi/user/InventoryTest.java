@@ -1,16 +1,17 @@
-package de.held.rocksolidapi.user.model;
+package de.held.rocksolidapi.user;
 
-import de.held.rocksolidapi.economy.model.ResourceIdVO;
+import de.held.rocksolidapi.market.ResourceIdVO;
+import de.held.rocksolidapi.user.Inventory;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-public class InventoryAggregateTest {
+public class InventoryTest {
 
 
 	@Test
 	public void add_noResourceIdYet_resourceIdAdded(){
 
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		inventory.add(resourceId, 1);
@@ -22,7 +23,7 @@ public class InventoryAggregateTest {
 	@Test
 	public void add_multipleAdd_resourceIdAdded(){
 
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		inventory.add(resourceId, 1);
@@ -35,7 +36,7 @@ public class InventoryAggregateTest {
 	@Test
 	public void add_zeroAdded_exception(){
 
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		Assertions.assertThatThrownBy(() -> inventory.add(resourceId, 0))
@@ -46,7 +47,7 @@ public class InventoryAggregateTest {
 	@Test
 	public void add_negativeAdded_exception(){
 
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		Assertions.assertThatThrownBy(() -> inventory.add(resourceId, -1))
@@ -56,7 +57,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void deduct_resourceAvailable_resourceDeducted() {
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		inventory.add(resourceId, 3);
@@ -67,7 +68,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void deduct_resourceExactlyAvailable_resourceDeducted() {
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		inventory.add(resourceId, 2);
@@ -78,7 +79,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void deduct_noResourceAvailable_exception() {
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		Assertions.assertThatThrownBy(() -> inventory.deduct(resourceId, 1))
@@ -87,7 +88,7 @@ public class InventoryAggregateTest {
 
 	@Test
 	public void deduct_notEnoughResources_exception() {
-		var inventory = new InventoryAggregate();
+		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);
 
 		inventory.add(resourceId, 1);

@@ -1,10 +1,10 @@
-package de.held.rocksolidapi.user.model;
+package de.held.rocksolidapi.user;
 
-import de.held.rocksolidapi.economy.model.ResourceIdVO;
+import de.held.rocksolidapi.market.ResourceIdVO;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InventoryAggregate {
+public class Inventory {
 
 	private final Map<ResourceIdVO, Integer> store = new HashMap<>();
 

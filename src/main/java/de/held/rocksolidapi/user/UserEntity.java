@@ -1,17 +1,17 @@
-package de.held.rocksolidapi.user.model;
+package de.held.rocksolidapi.user;
 
 import java.util.Objects;
 
 public class UserEntity {
 
-	private final InventoryAggregate inventory = new InventoryAggregate();
+	private final Inventory inventory = new Inventory();
 	private double money;
 
 	public UserEntity(double money) {
 		this.money = money;
 	}
 
-	public InventoryAggregate getInventory() {
+	public Inventory getInventory() {
 		return inventory;
 	}
 

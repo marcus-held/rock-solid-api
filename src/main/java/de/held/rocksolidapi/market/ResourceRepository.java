@@ -1,9 +1,5 @@
-package de.held.rocksolidapi.economy;
+package de.held.rocksolidapi.market;
 
-import de.held.rocksolidapi.economy.model.ResourceAggregate;
-import de.held.rocksolidapi.economy.model.ResourceEntity;
-import de.held.rocksolidapi.economy.model.ResourceFactory;
-import de.held.rocksolidapi.economy.model.ResourceIdVO;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
@@ -13,7 +9,7 @@ public class ResourceRepository {
 
 	private final ResourceFactory resourceFactory;
 
-	private ResourceAggregate store;
+	private Resources store;
 
 	public ResourceRepository(ResourceFactory resourceFactory) {
 		this.resourceFactory = resourceFactory;
@@ -21,7 +17,7 @@ public class ResourceRepository {
 
 	@PostConstruct
 	public void initResources() {
-		store = ResourceAggregate.of(
+		store = Resources.of(
 				resourceFactory.create("comic", 3),
 				resourceFactory.create("videogame", 50),
 				resourceFactory.create("doll", 15)

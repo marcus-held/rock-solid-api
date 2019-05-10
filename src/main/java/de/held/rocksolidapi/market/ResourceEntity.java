@@ -1,10 +1,11 @@
-package de.held.rocksolidapi.economy.model;
+package de.held.rocksolidapi.market;
 
 import java.util.Objects;
 
 public class ResourceEntity {
 
 	private final ResourceIdVO id;
+
 	private final String name;
 	private double price;
 
@@ -14,7 +15,7 @@ public class ResourceEntity {
 		this.price = price;
 	}
 
-	public ResourceIdVO getId() {
+	ResourceIdVO getId() {
 		return id;
 	}
 
@@ -22,11 +23,11 @@ public class ResourceEntity {
 		return name;
 	}
 
-	public double getPrice() {
+	double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -38,15 +39,13 @@ public class ResourceEntity {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		ResourceEntity resource = (ResourceEntity) o;
-		return Double.compare(resource.price, price) == 0 &&
-				id.equals(resource.id) &&
-				name.equals(resource.name);
+		ResourceEntity that = (ResourceEntity) o;
+		return Objects.equals(id, that.id);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name, price);
+		return Objects.hash(id);
 	}
 
 	@Override

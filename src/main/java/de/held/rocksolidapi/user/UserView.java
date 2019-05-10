@@ -7,14 +7,16 @@ import org.springframework.shell.standard.ShellMethod;
 public class UserView {
 
 	private final UserService userService;
+	private final UserRepository userRepository;
 
-	public UserView(UserService userService) {
+	public UserView(UserService userService, UserRepository userRepository) {
 		this.userService = userService;
+		this.userRepository = userRepository;
 	}
 
 	@ShellMethod(key = {"info"}, value = "Prints information about the user.")
 	public void printUserInfo() {
-		System.out.println(userService.getUser());
+		System.out.println(userRepository.getUser());
 	}
 
 	@ShellMethod(key = {"inventory", "inv"}, value = "Lists the inventory of the user")

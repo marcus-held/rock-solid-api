@@ -1,4 +1,4 @@
-package de.held.rocksolidapi.economy.model;
+package de.held.rocksolidapi.market;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Component;
