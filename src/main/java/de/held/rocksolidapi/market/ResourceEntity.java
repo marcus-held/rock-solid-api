@@ -28,7 +28,14 @@ public class ResourceEntity {
 	}
 
 	void setPrice(double price) {
+		if (price < 0) {
+			throw new IllegalArgumentException();
+		}
 		this.price = price;
+	}
+
+	public double getHumanReadablePrice() {
+		return Math.round(price * 100.0) / 100.0;
 	}
 
 	@Override

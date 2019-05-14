@@ -8,7 +8,7 @@ public class ResourceFactory {
 
 	private final ResourceIdGenerator resourceIdGenerator = new ResourceIdGenerator();
 
-	public ResourceEntity create(String name, double price) {
+	ResourceEntity create(String name, double price) {
 		return new ResourceEntity(resourceIdGenerator.newId(), name, price);
 	}
 

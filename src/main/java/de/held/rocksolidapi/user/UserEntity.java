@@ -19,6 +19,10 @@ public class UserEntity {
 		return money;
 	}
 
+	public double getHumanReadableMoney() {
+		return Math.round(money * 100.0) / 100.0;
+	}
+
 	public void deductMoney(Double value) {
 		if (money >= value) {
 			money -= value;
@@ -49,4 +53,11 @@ public class UserEntity {
 		return Objects.hash(inventory, money);
 	}
 
+	@Override
+	public String toString() {
+		return "UserEntity{" +
+				"inventory=" + inventory +
+				", money=" + money +
+				'}';
+	}
 }
