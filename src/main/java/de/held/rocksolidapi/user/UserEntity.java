@@ -1,13 +1,21 @@
 package de.held.rocksolidapi.user;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Represents the user.
+ */
 public class UserEntity {
 
 	private final Inventory inventory = new Inventory();
-	private double money;
+	private BigDecimal money;
 
-	public UserEntity(double money) {
+	public UserEntity(BigDecimal money) {
 		this.money = money;
 	}
 
@@ -15,24 +23,40 @@ public class UserEntity {
 		return inventory;
 	}
 
-	public double getMoney() {
+	public BigDecimal getMoney() {
 		return money;
 	}
 
-	public double getHumanReadableMoney() {
-		return Math.round(money * 100.0) / 100.0;
+	/**
+	 * @return the current money of the player with two decimal places. The value is always rounded down.
+	 */
+	public String getHumanReadableMoney() {
+		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
+		format.setRoundingMode(RoundingMode.DOWN);
+		return format.format(money);
 	}
 
-	public void deductMoney(Double value) {
-		if (money >= value) {
-			money -= value;
+	/**
+	 * Subtracts the value from the money and throws if the user has not enough money.
+	 *
+	 * @param value - The value to subtract.
+	 */
+	public void subtractMoney(BigDecimal value) {
+		BigDecimal subtract = money.subtract(value);
+		if (subtract.compareTo(BigDecimal.ZERO) >= 0) {
+			money = subtract;
 		} else {
 			throw new IllegalArgumentException("Not enough money to reduce from user.");
 		}
 	}
 
-	public void addMoney(Double value) {
-		money += value;
+	/**
+	 * Adds the value to the users money.
+	 *
+	 * @param value - The value to add
+	 */
+	public void addMoney(BigDecimal value) {
+		money = money.add(value);
 	}
 
 	@Override
@@ -43,9 +67,9 @@ public class UserEntity {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		UserEntity user = (UserEntity) o;
-		return Double.compare(user.money, money) == 0 &&
-				Objects.equals(inventory, user.inventory);
+		UserEntity that = (UserEntity) o;
+		return Objects.equals(inventory, that.inventory) &&
+				Objects.equals(money, that.money);
 	}
 
 	@Override

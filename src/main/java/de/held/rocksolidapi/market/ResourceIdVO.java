@@ -2,6 +2,9 @@ package de.held.rocksolidapi.market;
 
 import java.util.Objects;
 
+/**
+ * Represents the id of a {@link ResourceEntity}. Gets created by {@link ResourceFactory}.
+ */
 public class ResourceIdVO {
 
 	private final int id;

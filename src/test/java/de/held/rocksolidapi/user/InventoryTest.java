@@ -56,6 +56,15 @@ public class InventoryTest {
 	}
 
 	@Test
+	public void deduct_negativeAmount_exception() {
+		var inventory = new Inventory();
+		var resourceId = new ResourceIdVO(123);
+
+		Assertions.assertThatThrownBy(() -> inventory.deduct(resourceId, -1))
+				.isInstanceOf(RuntimeException.class);
+	}
+
+	@Test
 	public void deduct_resourceAvailable_resourceDeducted() {
 		var inventory = new Inventory();
 		var resourceId = new ResourceIdVO(123);

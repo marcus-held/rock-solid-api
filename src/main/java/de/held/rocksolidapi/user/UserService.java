@@ -6,6 +6,9 @@ import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
+/**
+ * Performs operations on the {@link UserEntity} of the user of the application.
+ */
 @Service
 public class UserService {
 
@@ -17,6 +20,9 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
+	/**
+	 * @return a map of the name of the resources and their amount that the player owns.
+	 */
 	public Map<String, Integer> getReadableInventory() {
 		return userRepository.getUser().getInventory().getAll().entrySet().stream()
 				.collect(Collectors.toMap(

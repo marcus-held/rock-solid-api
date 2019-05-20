@@ -1,15 +1,25 @@
 package de.held.rocksolidapi.market;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Represents a resource. Every resource has a unique {@link ResourceIdVO}.
+ * <p>
+ * Use {@link ResourceFactory} to generate new instances.
+ */
 public class ResourceEntity {
 
 	private final ResourceIdVO id;
 
 	private final String name;
-	private double price;
+	private BigDecimal price;
 
-	ResourceEntity(ResourceIdVO id, String name, double price) {
+	ResourceEntity(ResourceIdVO id, String name, BigDecimal price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -23,19 +33,29 @@ public class ResourceEntity {
 		return name;
 	}
 
-	double getPrice() {
+	BigDecimal getPrice() {
 		return price;
 	}
 
-	void setPrice(double price) {
-		if (price < 0) {
+	/**
+	 * Sets the price. The price mustn't be negative or zero.
+	 *
+	 * @param price - The new price of the resource.
+	 */
+	void setPrice(BigDecimal price) {
+		if (price.doubleValue() <= 0) {
 			throw new IllegalArgumentException();
 		}
 		this.price = price;
 	}
 
-	public double getHumanReadablePrice() {
-		return Math.round(price * 100.0) / 100.0;
+	/**
+	 * @return - the price rounded up to 2 decimal places.
+	 */
+	public String getHumanReadablePrice() {
+		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
+		format.setRoundingMode(RoundingMode.UP);
+		return format.format(price);
 	}
 
 	@Override

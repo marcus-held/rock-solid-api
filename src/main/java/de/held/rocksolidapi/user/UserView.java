@@ -3,6 +3,9 @@ package de.held.rocksolidapi.user;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+/**
+ * Defines the shell operations that can be executed on the user.
+ */
 @ShellComponent
 public class UserView {
 

@@ -1,19 +1,32 @@
 package de.held.rocksolidapi.market;
 
+import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Component;
 
+/**
+ * Creates new {@link ResourceEntity} and ensures unique {@link ResourceIdVO} for every instance.
+ */
 @Component
 public class ResourceFactory {
 
 	private final ResourceIdGenerator resourceIdGenerator = new ResourceIdGenerator();
 
-	ResourceEntity create(String name, double price) {
-		return new ResourceEntity(resourceIdGenerator.newId(), name, price);
+	/**
+	 * Creates a new {@link ResourceEntity} with a unique id.
+	 *
+	 * @param name - The name of the resource
+	 * @param price - The price of the resource. The String must be interpretable by
+	 * {@link BigDecimal#BigDecimal(String)}
+	 * @return - A new {@link ResourceEntity}
+	 */
+	ResourceEntity create(String name, String price) {
+		return new ResourceEntity(resourceIdGenerator.newId(), name, new BigDecimal(price));
 	}
 
 	private class ResourceIdGenerator {
 
+		// Use AtomicInteger to make the generator thread safe.
 		private AtomicInteger counter = new AtomicInteger(0);
 
 		ResourceIdVO newId() {
