@@ -1,10 +1,6 @@
 package de.held.rocksolidapi.user;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
+import de.held.rocksolidapi.market.Money;
 import java.util.Objects;
 
 /**
@@ -13,9 +9,9 @@ import java.util.Objects;
 public class UserEntity {
 
 	private final Inventory inventory = new Inventory();
-	private BigDecimal money;
+	private Money money;
 
-	public UserEntity(BigDecimal money) {
+	public UserEntity(Money money) {
 		this.money = money;
 	}
 
@@ -23,17 +19,8 @@ public class UserEntity {
 		return inventory;
 	}
 
-	public BigDecimal getMoney() {
+	public Money getMoney() {
 		return money;
-	}
-
-	/**
-	 * @return the current money of the player with two decimal places. The value is always rounded down.
-	 */
-	public String getHumanReadableMoney() {
-		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
-		format.setRoundingMode(RoundingMode.DOWN);
-		return format.format(money);
 	}
 
 	/**
@@ -41,13 +28,12 @@ public class UserEntity {
 	 *
 	 * @param value - The value to subtract.
 	 */
-	public void subtractMoney(BigDecimal value) {
-		BigDecimal subtract = money.subtract(value);
-		if (subtract.compareTo(BigDecimal.ZERO) >= 0) {
-			money = subtract;
-		} else {
-			throw new IllegalArgumentException("Not enough money to reduce from user.");
+	public void subtractMoney(Money value) throws NotEnoughMoneyException {
+		Money subtract = money.subtract(value);
+		if (subtract.isNegative()) {
+			throw new NotEnoughMoneyException();
 		}
+		money = subtract;
 	}
 
 	/**
@@ -55,7 +41,7 @@ public class UserEntity {
 	 *
 	 * @param value - The value to add
 	 */
-	public void addMoney(BigDecimal value) {
+	public void addMoney(Money value) {
 		money = money.add(value);
 	}
 

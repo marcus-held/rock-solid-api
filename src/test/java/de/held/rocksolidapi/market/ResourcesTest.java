@@ -12,7 +12,7 @@ public class ResourcesTest {
 	private ResourceFactory resourceFactory;
 
 	private ResourceEntity create(int id) {
-		return new ResourceEntity(new ResourceIdVO(id), UUID.randomUUID().toString(), BigDecimal.ONE);
+		return new ResourceEntity(new ResourceIdVO(id), UUID.randomUUID().toString(), new Money(1));
 	}
 
 	private ResourceEntity create(String name) {

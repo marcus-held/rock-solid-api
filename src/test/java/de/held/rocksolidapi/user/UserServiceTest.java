@@ -2,6 +2,7 @@ package de.held.rocksolidapi.user;
 
 import de.held.rocksolidapi.market.ResourceEntity;
 import de.held.rocksolidapi.market.ResourceIdVO;
+import de.held.rocksolidapi.market.ResourceNotFoundException;
 import de.held.rocksolidapi.market.ResourceRepository;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -41,7 +42,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void getReadableInventory_singleResource_resourceWithName() {
+	public void getReadableInventory_singleResource_resourceWithName() throws ResourceNotFoundException {
 		int resourceAmount = 1;
 		String resourceName = "foo";
 

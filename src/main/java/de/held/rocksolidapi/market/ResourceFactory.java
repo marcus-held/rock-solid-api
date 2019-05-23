@@ -21,7 +21,7 @@ public class ResourceFactory {
 	 * @return - A new {@link ResourceEntity}
 	 */
 	ResourceEntity create(String name, String price) {
-		return new ResourceEntity(resourceIdGenerator.newId(), name, new BigDecimal(price));
+		return new ResourceEntity(resourceIdGenerator.newId(), name, new Money(price));
 	}
 
 	private class ResourceIdGenerator {

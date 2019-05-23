@@ -17,9 +17,9 @@ public class ResourceEntity {
 	private final ResourceIdVO id;
 
 	private final String name;
-	private BigDecimal price;
+	private Money price;
 
-	ResourceEntity(ResourceIdVO id, String name, BigDecimal price) {
+	ResourceEntity(ResourceIdVO id, String name, Money price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -33,7 +33,7 @@ public class ResourceEntity {
 		return name;
 	}
 
-	BigDecimal getPrice() {
+	Money getPrice() {
 		return price;
 	}
 
@@ -42,20 +42,11 @@ public class ResourceEntity {
 	 *
 	 * @param price - The new price of the resource.
 	 */
-	void setPrice(BigDecimal price) {
-		if (price.doubleValue() <= 0) {
+	void setPrice(Money price) {
+		if (price.isNegativeOrZero()) {
 			throw new IllegalArgumentException();
 		}
 		this.price = price;
-	}
-
-	/**
-	 * @return - the price rounded up to 2 decimal places.
-	 */
-	public String getHumanReadablePrice() {
-		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
-		format.setRoundingMode(RoundingMode.UP);
-		return format.format(price);
 	}
 
 	@Override

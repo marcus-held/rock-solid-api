@@ -1,6 +1,7 @@
 package de.held.rocksolidapi.market;
 
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
@@ -44,29 +45,28 @@ public class ResourceRepository {
 	}
 
 	/**
-	 * Returns the {@link ResourceEntity} with the given name. Throws an exception if no resource can be found.
+	 * Returns the {@link ResourceEntity} with the given name.
 	 *
 	 * @param resourceName - The name of the resource to find.
 	 * @return - The {@link ResourceEntity} with the given name.
 	 */
-	public ResourceEntity findByName(String resourceName) {
+	public ResourceEntity findByName(String resourceName) throws ResourceNotFoundException {
 		return store.getResources().stream()
 				.filter(r -> r.getName().equals(resourceName))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(ResourceNotFoundException::new);
 	}
 
 	/**
-	 * Returns the {@link ResourceEntity} with the given {@link ResourceIdVO}. Throws an exception if no resource can
-	 * be found.
+	 * Returns the {@link ResourceEntity} with the given {@link ResourceIdVO}.
 	 *
 	 * @param id - The id of the resource to find.
 	 * @return - The {@link ResourceEntity} with the given id.
 	 */
-	public ResourceEntity findById(ResourceIdVO id) {
+	public ResourceEntity findById(ResourceIdVO id) throws ResourceNotFoundException {
 		return store.getResources().stream()
 				.filter(r -> r.getId().equals(id))
 				.findFirst()
-				.orElseThrow();
+				.orElseThrow(ResourceNotFoundException::new);
 	}
 }

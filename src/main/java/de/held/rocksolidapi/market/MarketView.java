@@ -1,5 +1,6 @@
 package de.held.rocksolidapi.market;
 
+import de.held.rocksolidapi.user.NotEnoughMoneyException;
 import de.held.rocksolidapi.user.UserRepository;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
@@ -32,9 +33,13 @@ public class MarketView {
 	public void sell(int amount, String resourceName) {
 		var user = userRepository.getUser();
 
-		marketService.sell(user, resourceName, amount);
-		System.out.println("Sold " + amount + " " + resourceName + ". You have " + user.getHumanReadableMoney()
-				+ " money now");
+		try {
+			marketService.sell(user, resourceName, amount);
+		} catch (ResourceNotFoundException e) {
+			System.out.println(resourceName + " is not a valid resource name.");
+		}
+		System.out.println("Sold " + amount + " " + resourceName + ". You have " + user.getMoney()
+				.getHumanReadableRoundedDownValue() + " money now");
 	}
 
 	/**
@@ -48,9 +53,15 @@ public class MarketView {
 	public void buy(int amount, String resourceName) {
 		var user = userRepository.getUser();
 
-		marketService.buy(user, resourceName, amount);
-		System.out.println("Bought " + amount + " " + resourceName + ". You have " + user.getHumanReadableMoney()
-				+ " money now");
+		try {
+			marketService.buy(user, resourceName, amount);
+		} catch (NotEnoughMoneyException e) {
+			System.out.println("User has  " + amount + " " + resourceName);
+		} catch (ResourceNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Bought " + amount + " " + resourceName + ". You have " + user.getMoney()
+				.getHumanReadableRoundedDownValue() + " money now");
 	}
 
 	/**
@@ -60,7 +71,8 @@ public class MarketView {
 	public void listPrices() {
 		resourceRepository.findAll()
 				.forEach(
-						resource -> System.out.println(resource.getName() + " -> " + resource.getHumanReadablePrice()));
+						resource -> System.out.println(
+								resource.getName() + " -> " + resource.getPrice().getHumanReadableRoundedUpValue()));
 		System.out.println("Hurry, next inflation in " + marketService.secondsToNextInflation() + " seconds");
 	}
 

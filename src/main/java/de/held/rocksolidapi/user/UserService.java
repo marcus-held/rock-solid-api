@@ -1,5 +1,6 @@
 package de.held.rocksolidapi.user;
 
+import de.held.rocksolidapi.market.ResourceNotFoundException;
 import de.held.rocksolidapi.market.ResourceRepository;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,7 +27,13 @@ public class UserService {
 	public Map<String, Integer> getReadableInventory() {
 		return userRepository.getUser().getInventory().getAll().entrySet().stream()
 				.collect(Collectors.toMap(
-						entry -> resourceRepository.findById(entry.getKey()).getName(),
+						entry -> {
+							try {
+								return resourceRepository.findById(entry.getKey()).getName();
+							} catch (ResourceNotFoundException e) {
+								throw new IllegalArgumentException();
+							}
+						},
 						Entry::getValue
 				));
 	}

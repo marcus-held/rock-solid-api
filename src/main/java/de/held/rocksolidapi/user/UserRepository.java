@@ -1,5 +1,6 @@
 package de.held.rocksolidapi.user;
 
+import de.held.rocksolidapi.market.Money;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRepository {
 
-	private UserEntity user = new UserEntity(BigDecimal.valueOf(500));
+	private UserEntity user = new UserEntity(new Money("500"));
 
 	public UserEntity getUser() {
 		return user;
