@@ -26,12 +26,13 @@ public class UserEntity {
 	/**
 	 * Subtracts the value from the money and throws if the user has not enough money.
 	 *
-	 * @param value - The value to subtract.
+	 * @param value The value to subtract.
+	 * @throws NotEnoughMoneyException When the subtracted money of the user would be negative.
 	 */
 	public void subtractMoney(Money value) throws NotEnoughMoneyException {
 		Money subtract = money.subtract(value);
 		if (subtract.isNegative()) {
-			throw new NotEnoughMoneyException();
+			throw new NotEnoughMoneyException(money, value);
 		}
 		money = subtract;
 	}

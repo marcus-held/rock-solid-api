@@ -7,12 +7,16 @@ import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 import java.util.Objects;
 
+/**
+ * Value object of a decimal number representing money. Will do precise arithmetic on the value it represents. The
+ * represented value is always scaled to two decimal points and rounded up in doubt.
+ */
 public class Money {
 
 	private BigDecimal value;
 
 	public Money(String value) {
-		this(new BigDecimal(value));
+		this(new BigDecimal(value).setScale(2, RoundingMode.UP));
 	}
 
 	public Money(BigDecimal value) {
@@ -20,19 +24,7 @@ public class Money {
 	}
 
 	public Money(int value) {
-		this(new BigDecimal(value));
-	}
-
-	public String getHumanReadableRoundedDownValue() {
-		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
-		format.setRoundingMode(RoundingMode.DOWN);
-		return format.format(value);
-	}
-
-	public String getHumanReadableRoundedUpValue() {
-		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
-		format.setRoundingMode(RoundingMode.UP);
-		return format.format(value);
+		this(Integer.toString(value));
 	}
 
 	public Money subtract(Money moneyToSubtract) {
@@ -55,6 +47,14 @@ public class Money {
 		return new Money(value.multiply(new BigDecimal(multiplier)));
 	}
 
+	/**
+	 * Multiplies the {@link Money}  with the provided value. Since multiplier is a double the result is not an exact
+	 * arithmetic.
+	 *
+	 * @param multiplier The value to multiply with
+	 * @return A new instance of {@link Money} with the result.
+	 * @see BigDecimal#valueOf(double)
+	 */
 	public Money multiply(double multiplier) {
 		return new Money(value.multiply(BigDecimal.valueOf(multiplier)));
 	}
@@ -74,5 +74,11 @@ public class Money {
 	@Override
 	public int hashCode() {
 		return Objects.hash(value);
+	}
+
+	@Override
+	public String toString() {
+		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
+		return format.format(value);
 	}
 }

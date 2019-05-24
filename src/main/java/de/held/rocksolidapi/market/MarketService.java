@@ -38,8 +38,7 @@ public class MarketService {
 	 * resources.
 	 * @throws ResourceNotFoundException when no {@link ResourceEntity} with the resourceName exists.
 	 */
-	public void buy(UserEntity user, String resourceName, int amount)
-			throws NotEnoughMoneyException, ResourceNotFoundException {
+	public void buy(UserEntity user, String resourceName, int amount) throws NotEnoughMoneyException, ResourceNotFoundException {
 		var resource = resourceRepository.findByName(resourceName);
 
 		user.subtractMoney(resource.getPrice().multiply(amount));

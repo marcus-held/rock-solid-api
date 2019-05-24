@@ -35,11 +35,10 @@ public class MarketView {
 
 		try {
 			marketService.sell(user, resourceName, amount);
+			System.out.println("Sold " + amount + " " + resourceName + ". You have " + user.getMoney() + " money now");
 		} catch (ResourceNotFoundException e) {
 			System.out.println(resourceName + " is not a valid resource name.");
 		}
-		System.out.println("Sold " + amount + " " + resourceName + ". You have " + user.getMoney()
-				.getHumanReadableRoundedDownValue() + " money now");
 	}
 
 	/**
@@ -55,13 +54,14 @@ public class MarketView {
 
 		try {
 			marketService.buy(user, resourceName, amount);
+			System.out.println("Bought " + amount + " " + resourceName + ". You have " + user.getMoney() + " money now");
 		} catch (NotEnoughMoneyException e) {
-			System.out.println("User has  " + amount + " " + resourceName);
+			System.out.println(
+					"Can't buy " + resourceName + " because you only have " + e.getCurrentMoney() + " money but "
+							+ amount + " " + resourceName + " costs " + e.getMoneyToSubtract() + " money.");
 		} catch (ResourceNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("Can't find resource with name " + resourceName);
 		}
-		System.out.println("Bought " + amount + " " + resourceName + ". You have " + user.getMoney()
-				.getHumanReadableRoundedDownValue() + " money now");
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class MarketView {
 		resourceRepository.findAll()
 				.forEach(
 						resource -> System.out.println(
-								resource.getName() + " -> " + resource.getPrice().getHumanReadableRoundedUpValue()));
+								resource.getName() + " -> " + resource.getPrice()));
 		System.out.println("Hurry, next inflation in " + marketService.secondsToNextInflation() + " seconds");
 	}
 
