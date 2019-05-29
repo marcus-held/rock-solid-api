@@ -7,36 +7,36 @@ public class UserEntityTest {
 
 	@Test
 	public void addMoney_moneyAdded() {
-		var user = new UserEntity(new Money(0));
-		user.addMoney(new Money(2));
+		var user = new UserEntity(new MoneyVO(0));
+		user.addMoney(new MoneyVO(2));
 
 		Assertions.assertThat(user.getMoney())
-				.isEqualTo(new Money(2));
+				.isEqualTo(new MoneyVO(2));
 	}
 
 	@Test
 	public void subtractMoney_enoughMoney_moneyDeducted() throws NotEnoughMoneyException {
-		var user = new UserEntity(new Money(3));
-		user.subtractMoney(new Money(1));
+		var user = new UserEntity(new MoneyVO(3));
+		user.subtractMoney(new MoneyVO(1));
 
 		Assertions.assertThat(user.getMoney())
-				.isEqualTo(new Money(2));
+				.isEqualTo(new MoneyVO(2));
 	}
 
 	@Test
 	public void subtractMoney_exactlyEnoughMoney_moneyDeducted() throws NotEnoughMoneyException {
-		var user = new UserEntity(new Money(3));
-		user.subtractMoney(new Money(3));
+		var user = new UserEntity(new MoneyVO(3));
+		user.subtractMoney(new MoneyVO(3));
 
 		Assertions.assertThat(user.getMoney())
-				.isEqualTo(new Money(0));
+				.isEqualTo(new MoneyVO(0));
 	}
 
 	@Test
 	public void subtractMoney_notEnoughMoney_exception() {
-		var user = new UserEntity(new Money(3));
+		var user = new UserEntity(new MoneyVO(3));
 
-		Assertions.assertThatThrownBy(() -> user.subtractMoney(new Money(4)))
+		Assertions.assertThatThrownBy(() -> user.subtractMoney(new MoneyVO(4)))
 				.isInstanceOf(NotEnoughMoneyException.class);
 	}
 

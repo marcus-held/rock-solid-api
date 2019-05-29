@@ -8,9 +8,9 @@ import java.util.Objects;
 public class UserEntity {
 
 	private final Inventory inventory = new Inventory();
-	private Money money;
+	private MoneyVO money;
 
-	public UserEntity(Money money) {
+	public UserEntity(MoneyVO money) {
 		this.money = money;
 	}
 
@@ -18,7 +18,7 @@ public class UserEntity {
 		return inventory;
 	}
 
-	public Money getMoney() {
+	public MoneyVO getMoney() {
 		return money;
 	}
 
@@ -28,8 +28,8 @@ public class UserEntity {
 	 * @param value The value to subtract.
 	 * @throws NotEnoughMoneyException When the subtracted money of the user would be negative.
 	 */
-	public void subtractMoney(Money value) throws NotEnoughMoneyException {
-		Money subtract = money.subtract(value);
+	public void subtractMoney(MoneyVO value) throws NotEnoughMoneyException {
+		MoneyVO subtract = money.subtract(value);
 		if (subtract.isNegative()) {
 			throw new NotEnoughMoneyException(money, value);
 		}
@@ -41,7 +41,7 @@ public class UserEntity {
 	 *
 	 * @param value - The value to add
 	 */
-	public void addMoney(Money value) {
+	public void addMoney(MoneyVO value) {
 		money = money.add(value);
 	}
 

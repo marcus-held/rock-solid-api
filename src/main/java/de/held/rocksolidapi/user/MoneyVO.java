@@ -11,28 +11,28 @@ import java.util.Objects;
  * Value object of a decimal number representing money. Will do precise arithmetic on the value it represents. The
  * represented value is always scaled to two decimal points and rounded up in doubt.
  */
-public class Money {
+public class MoneyVO {
 
 	private BigDecimal value;
 
-	public Money(String value) {
+	public MoneyVO(String value) {
 		this(new BigDecimal(value).setScale(2, RoundingMode.UP));
 	}
 
-	public Money(BigDecimal value) {
+	public MoneyVO(BigDecimal value) {
 		this.value = value;
 	}
 
-	public Money(int value) {
+	public MoneyVO(int value) {
 		this(Integer.toString(value));
 	}
 
-	public Money subtract(Money moneyToSubtract) {
-		return new Money(value.subtract(moneyToSubtract.value));
+	public MoneyVO subtract(MoneyVO moneyToSubtract) {
+		return new MoneyVO(value.subtract(moneyToSubtract.value));
 	}
 
-	public Money add(Money moneyToAdd) {
-		return new Money(value.add(moneyToAdd.value));
+	public MoneyVO add(MoneyVO moneyToAdd) {
+		return new MoneyVO(value.add(moneyToAdd.value));
 	}
 
 	public boolean isNegative() {
@@ -43,20 +43,20 @@ public class Money {
 		return value.compareTo(BigDecimal.ZERO) <= 0;
 	}
 
-	public Money multiply(int multiplier) {
-		return new Money(value.multiply(new BigDecimal(multiplier)));
+	public MoneyVO multiply(int multiplier) {
+		return new MoneyVO(value.multiply(new BigDecimal(multiplier)));
 	}
 
 	/**
-	 * Multiplies the {@link Money}  with the provided value. Since multiplier is a double the result is not applying
+	 * Multiplies the {@link MoneyVO}  with the provided value. Since multiplier is a double the result is not applying
 	 * exact arithmetic.
 	 *
 	 * @param multiplier The value to multiply with
-	 * @return A new instance of {@link Money} with the result.
+	 * @return A new instance of {@link MoneyVO} with the result.
 	 * @see BigDecimal#valueOf(double)
 	 */
-	public Money multiply(double multiplier) {
-		return new Money(value.multiply(BigDecimal.valueOf(multiplier)));
+	public MoneyVO multiply(double multiplier) {
+		return new MoneyVO(value.multiply(BigDecimal.valueOf(multiplier)));
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class Money {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Money money = (Money) o;
+		MoneyVO money = (MoneyVO) o;
 		return Objects.equals(value, money.value);
 	}
 
@@ -81,4 +81,5 @@ public class Money {
 		var format = new DecimalFormat("#0.00", new DecimalFormatSymbols(Locale.ENGLISH));
 		return format.format(value);
 	}
+
 }

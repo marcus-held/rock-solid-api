@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRepository {
 
-	private UserEntity user = new UserEntity(new Money("500"));
+	private UserEntity user = new UserEntity(new MoneyVO("500"));
 
 	public UserEntity getUser() {
 		return user;

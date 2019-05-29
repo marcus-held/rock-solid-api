@@ -1,13 +1,13 @@
 package de.held.rocksolidapi.market;
 
-import de.held.rocksolidapi.user.Money;
+import de.held.rocksolidapi.user.MoneyVO;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 public class ResourceEntityTest {
 
 	private ResourceEntity create(String price) {
-		return new ResourceEntity(new ResourceIdVO(1), "foo", new Money(price));
+		return new ResourceEntity(new ResourceIdVO(1), "foo", new MoneyVO(price));
 	}
 
 	private ResourceEntity create() {
@@ -18,7 +18,7 @@ public class ResourceEntityTest {
 	public void setPrice_positive_priceSet() {
 		ResourceEntity resource = create();
 
-		Money newPrice = new Money("2.2");
+		MoneyVO newPrice = new MoneyVO("2.2");
 		resource.setPrice(newPrice);
 
 		Assertions.assertThat(resource.getPrice())
@@ -29,7 +29,7 @@ public class ResourceEntityTest {
 	public void setPrice_zero_exception() {
 		ResourceEntity resource = create();
 
-		Money newPrice = new Money(0);
+		MoneyVO newPrice = new MoneyVO(0);
 
 		Assertions.assertThatThrownBy(() -> resource.setPrice(newPrice)).isInstanceOf(RuntimeException.class);
 	}
@@ -38,7 +38,7 @@ public class ResourceEntityTest {
 	public void setPrice_negative_exception() {
 		ResourceEntity resource = create();
 
-		Money newPrice = new Money("-5");
+		MoneyVO newPrice = new MoneyVO("-5");
 
 		Assertions.assertThatThrownBy(() -> resource.setPrice(newPrice)).isInstanceOf(RuntimeException.class);
 	}

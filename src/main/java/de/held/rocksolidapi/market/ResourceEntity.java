@@ -1,6 +1,6 @@
 package de.held.rocksolidapi.market;
 
-import de.held.rocksolidapi.user.Money;
+import de.held.rocksolidapi.user.MoneyVO;
 import java.util.Objects;
 
 /**
@@ -13,9 +13,9 @@ public class ResourceEntity {
 	private final ResourceIdVO id;
 
 	private final String name;
-	private Money price;
+	private MoneyVO price;
 
-	ResourceEntity(ResourceIdVO id, String name, Money price) {
+	ResourceEntity(ResourceIdVO id, String name, MoneyVO price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -29,7 +29,7 @@ public class ResourceEntity {
 		return name;
 	}
 
-	Money getPrice() {
+	MoneyVO getPrice() {
 		return price;
 	}
 
@@ -38,7 +38,7 @@ public class ResourceEntity {
 	 *
 	 * @param price - The new price of the resource.
 	 */
-	void setPrice(Money price) {
+	void setPrice(MoneyVO price) {
 		if (price.isNegativeOrZero()) {
 			throw new IllegalArgumentException();
 		}

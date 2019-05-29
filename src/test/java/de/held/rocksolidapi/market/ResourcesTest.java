@@ -1,6 +1,6 @@
 package de.held.rocksolidapi.market;
 
-import de.held.rocksolidapi.user.Money;
+import de.held.rocksolidapi.user.MoneyVO;
 import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -12,7 +12,7 @@ public class ResourcesTest {
 	private ResourceFactory resourceFactory;
 
 	private ResourceEntity create(int id) {
-		return new ResourceEntity(new ResourceIdVO(id), UUID.randomUUID().toString(), new Money(1));
+		return new ResourceEntity(new ResourceIdVO(id), UUID.randomUUID().toString(), new MoneyVO(1));
 	}
 
 	private ResourceEntity create(String name) {

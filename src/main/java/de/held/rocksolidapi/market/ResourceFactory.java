@@ -1,6 +1,6 @@
 package de.held.rocksolidapi.market;
 
-import de.held.rocksolidapi.user.Money;
+import de.held.rocksolidapi.user.MoneyVO;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class ResourceFactory {
 	 * @return A new {@link ResourceEntity}
 	 */
 	ResourceEntity create(String name, String price) {
-		return new ResourceEntity(resourceIdGenerator.newId(), name, new Money(price));
+		return new ResourceEntity(resourceIdGenerator.newId(), name, new MoneyVO(price));
 	}
 
 	private class ResourceIdGenerator {

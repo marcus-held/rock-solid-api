@@ -5,20 +5,20 @@ package de.held.rocksolidapi.user;
  */
 public class NotEnoughMoneyException extends RuntimeException {
 
-	private Money currentMoney;
+	private MoneyVO currentMoney;
 
-	private Money moneyToSubtract;
+	private MoneyVO moneyToSubtract;
 
-	public NotEnoughMoneyException(Money currentMoney, Money moneyToSubtract) {
+	public NotEnoughMoneyException(MoneyVO currentMoney, MoneyVO moneyToSubtract) {
 		this.currentMoney = currentMoney;
 		this.moneyToSubtract = moneyToSubtract;
 	}
 
-	public Money getCurrentMoney() {
+	public MoneyVO getCurrentMoney() {
 		return currentMoney;
 	}
 
-	public Money getMoneyToSubtract() {
+	public MoneyVO getMoneyToSubtract() {
 		return moneyToSubtract;
 	}
 }
