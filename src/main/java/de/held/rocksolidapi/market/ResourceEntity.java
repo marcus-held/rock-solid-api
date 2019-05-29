@@ -1,10 +1,6 @@
 package de.held.rocksolidapi.market;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
+import de.held.rocksolidapi.user.Money;
 import java.util.Objects;
 
 /**

@@ -1,15 +1,8 @@
 package de.held.rocksolidapi.market;
 
-import java.math.BigDecimal;
+import de.held.rocksolidapi.user.Money;
 import org.assertj.core.api.Assertions;
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-
-import static org.mockito.Mockito.*;
 
 public class ResourceEntityTest {
 

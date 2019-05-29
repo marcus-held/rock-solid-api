@@ -1,10 +1,6 @@
 package de.held.rocksolidapi.user;
 
-import de.held.rocksolidapi.market.Money;
-import de.held.rocksolidapi.user.UserEntity;
-import java.math.BigDecimal;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.Test;
 
 public class UserEntityTest {

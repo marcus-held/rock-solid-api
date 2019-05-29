@@ -1,5 +1,6 @@
 package de.held.rocksolidapi.market;
 
+import de.held.rocksolidapi.user.Money;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 

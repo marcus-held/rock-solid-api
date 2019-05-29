@@ -1,5 +1,6 @@
 package de.held.rocksolidapi.market;
 
+import de.held.rocksolidapi.user.Money;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.springframework.stereotype.Component;
@@ -13,12 +14,12 @@ public class ResourceFactory {
 	private final ResourceIdGenerator resourceIdGenerator = new ResourceIdGenerator();
 
 	/**
-	 * Creates a new {@link ResourceEntity} with a unique id.
+	 * Creates a new {@link ResourceEntity} with a unique id. This method is thread-safe.
 	 *
-	 * @param name - The name of the resource
-	 * @param price - The price of the resource. The String must be interpretable by
-	 * {@link BigDecimal#BigDecimal(String)}
-	 * @return - A new {@link ResourceEntity}
+	 * @param name The name of the resource
+	 * @param price The price of the resource. The String must be interpretable by
+	 * {@link BigDecimal#BigDecimal(String)}. A price must be positive.
+	 * @return A new {@link ResourceEntity}
 	 */
 	ResourceEntity create(String name, String price) {
 		return new ResourceEntity(resourceIdGenerator.newId(), name, new Money(price));

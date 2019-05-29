@@ -1,6 +1,6 @@
 package de.held.rocksolidapi.market;
 
-import java.math.BigDecimal;
+import de.held.rocksolidapi.user.Money;
 import java.util.UUID;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;

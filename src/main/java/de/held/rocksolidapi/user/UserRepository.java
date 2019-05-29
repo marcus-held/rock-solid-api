@@ -1,7 +1,5 @@
 package de.held.rocksolidapi.user;
 
-import de.held.rocksolidapi.market.Money;
-import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 
 /**

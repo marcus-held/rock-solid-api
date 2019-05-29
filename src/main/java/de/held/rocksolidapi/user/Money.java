@@ -1,4 +1,4 @@
-package de.held.rocksolidapi.market;
+package de.held.rocksolidapi.user;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -48,8 +48,8 @@ public class Money {
 	}
 
 	/**
-	 * Multiplies the {@link Money}  with the provided value. Since multiplier is a double the result is not an exact
-	 * arithmetic.
+	 * Multiplies the {@link Money}  with the provided value. Since multiplier is a double the result is not applying
+	 * exact arithmetic.
 	 *
 	 * @param multiplier The value to multiply with
 	 * @return A new instance of {@link Money} with the result.
